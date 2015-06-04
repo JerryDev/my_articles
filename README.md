@@ -4,7 +4,7 @@ If you are interesting, you are welcome to reading.
 
 这里是我的个人文章仓库，如果愿意，欢迎浏览。
 
-之所以把文章放在这里，主要是方便写作和备份之用。
+之所以把文章放在这里，方便写作和备份也。
 
 ## LICENSE 许可协议
 
