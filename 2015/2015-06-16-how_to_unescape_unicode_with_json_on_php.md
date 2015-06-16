@@ -54,6 +54,8 @@ $str = json_encode($arr);
 echo urldecode($str);
 ```
 
+结果：
+
 ```json
 {"test":"测\"试\r\n换行"}
 ```
@@ -99,6 +101,8 @@ $str = json_encode($arr);
 echo urldecode($str);
 ```
 
+结果：
+
 ```json
 {"test":"测\"试\r\n换\\行"}
 ```
@@ -126,6 +130,13 @@ array_walk_recursive($arr, 'string_urlencode');
 $str = json_encode($arr);
 echo urldecode($str);
 ```
+
+结果：
+
+```
+{"test":"测\"试\r\n换\b行\f制\t表\\ha"}
+```
+
 
 解决办法四：
 php5.4已经提供了原生的解决办法
