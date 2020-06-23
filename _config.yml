@@ -71,5 +71,5 @@ theme: landscape
 deploy:
   type: git
   repo: git@github.com:guozhenyi/guozhenyi.github.io.git
-  branch: dev
+  branch: gh-pages
   message:
