@@ -1,23 +1,26 @@
-author:秋凡
-datetime:2015-06-11 10:05:55
+---
+title: 怎样定义js类
+date: 2015-06-11 10:05:55
+tags: javascript
+---
 
-
-# 怎样定义js类
 
 要解决的问题：
 遇到要用js解析数据，并填充网页，如果过程式的写js，会很容易导致变量冲突，而且不利于迁移和维护，但是对于js的OOP编程几乎一窍不通，不过OOP的思想总归是和其他语言相通的，经过查找资料，和自己的摸索，此文主要记录摸索过程，通过实践验证理论。
 
+<!--more-->
+
 ### js类的定义
 
-首页，我们不看广告，看疗效。
+首先，我们不看广告，看疗效。
 简单看看定义js类的方式
 
 ```javascript
-function Util(){
+function Util() {
     // ...
 }
 
-var help = function(){
+var help = function() {
     // ...
 }
 
@@ -30,8 +33,8 @@ obj 定义了一个对象。
 </pre>
 
 
-<script type="text/javascript">
-function ObjAAA(){
+```javascript
+function ObjAAA() {
 
     var _a1 = 1;
     this._a2 = 2;
@@ -39,15 +42,15 @@ function ObjAAA(){
     // console.log('inner a1 ' + _a1);
     // console.log('inner a2 ' + this._a2);
 
-    this.fn3 = function(){
+    this.fn3 = function() {
         return _a1;
     };
 
-    var fn4 = function(){
+    var fn4 = function() {
         return 4;
     };
 
-    function fn5(){
+    function fn5() {
         return 5;
     };
 
@@ -67,13 +70,13 @@ console.log('--------------');
 
 var dddd = {
     'a':1,
-    b:function(){
+    b:function() {
         return this.a;
     },
-    cc:function(){
+    cc:function() {
         return '111';
     },
-    dd:function(){
+    dd:function() {
         console.log('222');
     }
 }
@@ -85,22 +88,22 @@ dddd.dd();
 console.log('--------------');
 
 
-function Class1(){
+function Class1() {
     //self(self被附加到了对象上) self只对私有成员可见(能.点出来 i aa() .点不出来public_dd())
     var self = this;
     this.i = 1;
-    this.aa = function(){
+    this.aa = function() {
         this.i ++;
         console.log(this.i);
     }
-    var private_bb = function(){
+    var private_bb = function() {
         console.log(self.i);
         //self.public_dd();//错误 self无法从外部访问,同时self也无法被这个对象的公共方法所访问
         //aa();//错误  私有方法要通过self调用
         public_dd();//可以直接调用 不能用self.public_dd();
         self.aa();
     }
-    this.cc = function(){
+    this.cc = function() {
         private_bb();//私有函数
     }
 
@@ -118,8 +121,6 @@ function Class1(){
 // document.write(o.i);//return 2
 
 
-</script>
-
-
+```
 
 

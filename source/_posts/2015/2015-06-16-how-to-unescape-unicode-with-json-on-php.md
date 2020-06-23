@@ -1,7 +1,9 @@
-author: 秋凡
-datetime: 2015-06-16 10:34:30
+---
+title: 怎样在JSON字符串中不转码Unicode字符
+date: 2015-06-16 10:34:30
+tags: php
+---
 
-# 怎样在JSON字符串中不转码Unicode字符
 
 对于JSON的编码和解码已经足够方便，几乎在各种编程语言之中都已经实现。在PHP之中，有json_encode 和 json_decode 函数实现。
 
@@ -17,6 +19,8 @@ echo $str;
 ```json
 {"test":"\u6d4b\u8bd5"}
 ```
+
+<!--more-->
 
 因此，先用urlencode编码字符串值，再json_encode编码成JSON，最后用urldecode解码。
 
@@ -77,7 +81,7 @@ echo urldecode($str);
 
 于是查了下php手册，addslashes只能转义 ' " \ null 四种字符
 
-但是根据网友的论证，mysql_escape_string 转义的字符会更多，多了\r \n 和另一个Control-Z 字符，别问我Control-Z是什么，你可以参考[这里](http://www.cnblogs.com/suihui/archive/2012/09/20/2694751.html),找出答案了可以pull request 给我
+mysql_escape_string 转义的字符会更多，多了\r \n 和另一个Control-Z 字符，别问我Control-Z是什么，你可以参考[这里](http://www.cnblogs.com/suihui/archive/2012/09/20/2694751.html)
 
 so， 上面的代码改一下
 
@@ -107,7 +111,7 @@ echo urldecode($str);
 {"test":"测\"试\r\n换\\行"}
 ```
 
-当然，因为JSON的规则是确定的，并且对于哪些字符需要转义也是确定的。
+当然，因为[JSON](http://json.org/json-zh.html)的规则是确定的，并且对于哪些字符需要转义也是确定的。
 so，我们可以更极端一点，干脆不用addslashes函数，自己把所有的特殊字符转义了
 
 解决办法三：
@@ -139,7 +143,7 @@ echo urldecode($str);
 
 
 解决办法四：
-php5.4已经提供了原生的解决办法
+php5.4版本开始已经提供了原生的解决办法
 
 ```php
 $arr = array(
@@ -155,9 +159,12 @@ echo $str;
 
 
 总结分析：
-办法一： 方便实用，但是mysql_escape_string函数在未来php版本可能被移除
+办法一： 方便实用，但是 mysql_escape_string 函数在未来php版本可能被移除（后记：在php7中已经移除）
 办法二： 比较简单，够用
 办法三： 强迫症+深究型比较喜欢的方式，很够显比格？
 办法四： 部署环境必须要PHP的版本在5.4及以上
 
 但是客观的说，如果环境允许，选择第四种，其次二三择其一，最次选择第一种。
+
+End--
+
